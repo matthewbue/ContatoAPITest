@@ -92,21 +92,6 @@ namespace Contatos.Application.Tests.Services
         }
 
         [Fact]
-        public void CreateContato_ContatoMaiorDeIdade_ReturnsErro()
-        {
-            var dto = new ContatoRequestDto
-            {
-                DataNascimento = DateTime.Now.AddDays(1), 
-                NomeContato = "John Doe",
-                Telefone = "123456789",
-                Sexo = "M"
-            };
-
-            var result = _contatoService.CreateContato(dto);
-
-            Assert.Equal("O contato deve ser maior de idade.", result);
-        }
-        [Fact]
         public void CreateContato_IdadeNaoPodeSerIgualZero_ReturnsErro()
         {
             var dto = new ContatoRequestDto
@@ -120,6 +105,22 @@ namespace Contatos.Application.Tests.Services
             var result = _contatoService.CreateContato(dto);
 
             Assert.Equal("A idade não pode ser igual a 0.", result);
+        }
+
+        [Fact]
+        public void CreateContato_DataNascimentoNaoPodeSerMaior_ReturnsErro()
+        {
+            var dto = new ContatoRequestDto
+            {
+                DataNascimento = DateTime.Now.AddDays(20),
+                NomeContato = "John Doe",
+                Telefone = "123456789",
+                Sexo = "M"
+            };
+
+            var result = _contatoService.CreateContato(dto);
+
+            Assert.Equal("A data de nascimento não pode ser maior que a data de hoje.", result);
         }
     }
 }
