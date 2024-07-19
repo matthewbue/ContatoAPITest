@@ -108,7 +108,7 @@ namespace Contatos.Application.Tests.Services
         }
 
         [Fact]
-        public void CreateContato_DataNascimentoNaoPodeSerMaior_ReturnsErro()
+        public void CreateContato_DataNascimentoNaoPodeSerMaiorDataAtual_ReturnsErro()
         {
             var dto = new ContatoRequestDto
             {
