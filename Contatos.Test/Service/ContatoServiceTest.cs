@@ -106,5 +106,20 @@ namespace Contatos.Application.Tests.Services
 
             Assert.Equal("O contato deve ser maior de idade.", result);
         }
+        [Fact]
+        public void CreateContato_IdadeNaoPodeSerIgualZero_ReturnsErro()
+        {
+            var dto = new ContatoRequestDto
+            {
+                DataNascimento = DateTime.Now,
+                NomeContato = "John Doe",
+                Telefone = "123456789",
+                Sexo = "M"
+            };
+
+            var result = _contatoService.CreateContato(dto);
+
+            Assert.Equal("A idade não pode ser igual a 0.", result);
+        }
     }
 }

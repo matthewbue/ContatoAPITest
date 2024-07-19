@@ -21,11 +21,7 @@ namespace Contatos.Application.Services
             validationMessage = string.Empty;
             var idade = DateTime.Now.Year - entrada.DataNascimento.Year;
 
-            if (idade < 18)
-            {
-                validationMessage = "O contato deve ser maior de idade.";
-                return false;
-            }
+           
 
             if (entrada.DataNascimento > DateTime.Now)
             {
@@ -43,6 +39,12 @@ namespace Contatos.Application.Services
             if (idade == 0)
             {
                 validationMessage = "A idade não pode ser igual a 0.";
+                return false;
+            }
+
+            if (idade < 18)
+            {
+                validationMessage = "O contato deve ser maior de idade.";
                 return false;
             }
 
